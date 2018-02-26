@@ -3,8 +3,13 @@
 
 # But not these files...
 !.gitignore
-!*.vhd
-!*.vht
-!*.bdf
-!*.bsf
-!*.md
+
+!/tests/
+!/source/
+!/simulation_results/
+
+!/source/*.vhd
+!/tests/*.vht
+!/source/*.bdf
+!/source/*.bsf
+!/source/*.md
