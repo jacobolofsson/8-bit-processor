@@ -5,12 +5,12 @@ use work.my_package.all;
 entity my_ALU is
    port (
       CLK     : in std_logic;
-      OPCODE  : in my_pc_op_type;
-      NEW_ACC : in my_bus_type;
-      NEW_TMP : in my_bus_type;
+      OPCODE  : in my_ALU_op_type;
       LD_ACC  : in std_logic;
       LD_TMP  : in std_logic;
       INC_ACC : in std_logic;
+      NEW_ACC : in my_bus_type;
+      NEW_TMP : in my_bus_type;
       RESULT  : out my_bus_type;
       RES_GT  : out std_logic;
       RES_Z   : out std_logic
