@@ -6,7 +6,6 @@ entity my_program_counter is
    port (
       CLK           : in std_logic;
       INC_PC        : in std_logic;
-      LD_PC         : in std_logic;
       LD_JMP_VALUE  : in std_logic;
       JMP_ENA       : in std_logic;
       JMP_BACKWARD  : in std_logic;

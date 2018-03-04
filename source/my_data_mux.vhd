@@ -4,7 +4,6 @@ use work.my_package.all;
 
 entity my_data_mux is
    port (
-      --CLK   : in std_logic; Remove?
       SEL  : in my_data_bus_sel_type;
       ALU  : in my_bus_type;
       MEM  : in my_bus_type;
@@ -14,4 +13,8 @@ end entity;
 
 architecture rtl of my_data_mux is
 begin
+    with SEL select
+        DATA_BUS <= ALU when SEL_D_ALU,
+                    MEM when SEL_D_MEM,
+                    (others => '0') when others;
 end architecture;

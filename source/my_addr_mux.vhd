@@ -4,7 +4,6 @@ use work.my_package.all;
 
 entity my_addr_mux is
    port (
-      --CLK   : in std_logic; remove?
       SEL   : in my_addr_bus_sel_type;
       PC    : in my_bus_type;
       ADR1  : in my_bus_type;
@@ -15,4 +14,9 @@ end entity;
 
 architecture rtl of my_addr_mux is
 begin
+    with SEL select
+        ADDR_BUS <= PC   when SEL_A_PC,
+                    ADR1 when SEL_A_ADR1,
+                    ADR2 when SEL_A_ADR2,
+                    (others => '0') when others;
 end architecture;
