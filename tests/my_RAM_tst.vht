@@ -11,7 +11,7 @@ architecture test of my_RAM_TST is
         port (
           CLK       : in std_logic;
           WRITE_ENA : in std_logic;
-          ADDRES    : in my_bus_type;
+          ADDRESS   : in my_bus_type;
           DATA_IN   : in my_bus_type;
           DATA_OUT  : out my_bus_type
         );
@@ -19,7 +19,7 @@ architecture test of my_RAM_TST is
 
     signal CLK       : std_logic := '0';
     signal WRITE_ENA : std_logic := '0';
-    signal ADDRES    : my_bus_type := "00001111";
+    signal ADDRESS   : my_bus_type := "00001111";
     signal DATA_IN   : my_bus_type := "10101010";
     signal DATA_OUT  : my_bus_type;
 
@@ -31,7 +31,7 @@ begin
     port map (
           CLK       => CLK,
           WRITE_ENA => WRITE_ENA,
-          ADDRES    => ADDRES,
+          ADDRESS   => ADDRESS,
           DATA_IN   => DATA_IN,
           DATA_OUT  => DATA_OUT
     );
@@ -51,7 +51,7 @@ begin
         severity error;
 
         WRITE_ENA <= '0';
-        ADDRES <= "11110000";
+        ADDRESS <= "11110000";
 
         wait for CLK_PERIOD;
         assert DATA_OUT = "00000000"
