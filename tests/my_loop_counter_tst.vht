@@ -39,26 +39,26 @@ begin
     stimuli : process
     begin
        wait for CLK_PERIOD*2;
-       assert LOOP_VALUE_ZERO = '0';
+       assert LOOP_VALUE_ZERO = '0'
        report "LOOP_VALUE_ZERO /= 0"
        severity error;
 
        LD_LOOP_VALUE <= '1';
 
        wait for CLK_PERIOD;
-       assert LOOP_VALUE_ZERO = '0';
+       assert LOOP_VALUE_ZERO = '0'
        report "LOOP_VALUE_ZERO /= 0"
        severity error;
 
        DEC_LOOP_VALUE <= '1';
 
        wait for CLK_PERIOD;
-       assert LOOP_VALUE_ZERO = '0';
+       assert LOOP_VALUE_ZERO = '0'
        report "LOOP_VALUE_ZERO /= 0"
        severity error;
 
        wait for CLK_PERIOD;
-       assert LOOP_VALUE_ZERO = '1';
+       assert LOOP_VALUE_ZERO = '1'
        report "LOOP_VALUE_ZERO /= 1 after loop"
        severity error;
 
