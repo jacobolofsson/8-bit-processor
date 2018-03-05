@@ -52,7 +52,7 @@ applicable agreement for further details.
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
 )
 (symbol
-	(rect 664 56 904 168)
+	(rect 664 56 912 168)
 	(text "my_ram" (rect 5 0 46 12)(font "Arial" ))
 	(text "inst" (rect 8 96 25 108)(font "Arial" ))
 	(port
@@ -65,8 +65,8 @@ applicable agreement for further details.
 	(port
 		(pt 0 48)
 		(input)
-		(text "ADDRES[7..0]" (rect 0 0 71 12)(font "Arial" ))
-		(text "ADDRES[7..0]" (rect 21 43 92 55)(font "Arial" ))
+		(text "ADDRESS[7..0]" (rect 0 0 79 12)(font "Arial" ))
+		(text "ADDRESS[7..0]" (rect 21 43 100 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
@@ -84,14 +84,14 @@ applicable agreement for further details.
 		(line (pt 0 80)(pt 16 80))
 	)
 	(port
-		(pt 240 32)
+		(pt 248 32)
 		(output)
 		(text "DATA_OUT[7..0]" (rect 0 0 82 12)(font "Arial" ))
-		(text "DATA_OUT[7..0]" (rect 150 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 3))
+		(text "DATA_OUT[7..0]" (rect 158 27 227 39)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 224 96))
+		(rectangle (rect 16 16 232 96))
 	)
 )
 (symbol
@@ -147,11 +147,6 @@ applicable agreement for further details.
 (connector
 	(pt 224 120)
 	(pt 352 120)
-)
-(connector
-	(pt 904 88)
-	(pt 920 88)
-	(bus)
 )
 (connector
 	(pt 920 88)
@@ -210,5 +205,10 @@ applicable agreement for further details.
 (connector
 	(pt 336 104)
 	(pt 352 104)
+)
+(connector
+	(pt 912 88)
+	(pt 920 88)
+	(bus)
 )
 (junction (pt 336 104))

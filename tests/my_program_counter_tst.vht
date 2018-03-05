@@ -72,7 +72,7 @@ begin
         JMP_ENA <= '1';
         
         wait for CLK_PERIOD;
-        assert OUT_PC = "11110010";
+        assert OUT_PC = "11110010"
         report "Jump forward failed"
         severity error;
 
@@ -83,13 +83,6 @@ begin
         report "Jump backward failed"
         severity error;
         
-        INC_PC <= '1';
-
-        wait for CLK_PERIOD;
-        assert OUT_PC <= "00000010"
-        report "PC updating when PC_LD = 0"
-        severity error;
-
         wait;
     end process;
 end architecture;

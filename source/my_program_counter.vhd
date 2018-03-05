@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.std_logic_arith.all;
 use work.my_package.all;
 
 entity my_program_counter is
@@ -15,5 +16,24 @@ entity my_program_counter is
 end entity;
 
 architecture rtl of my_program_counter is
+   signal jump_value : unsigned(REG_WIDTH-1 downto 0) := (others => '0');
+   signal counter    : unsigned(REG_WIDTH-1 downto 0) := (others => '0');
 begin
+   process (CLK)
+   begin
+      if rising_edge(CLK) then
+         if INC_PC = '1' then
+            counter <= counter + 1;
+         elsif JMP_ENA = '1' and JMP_BACKWARD = '1' then
+            counter <= counter - jump_value;
+         elsif JMP_ENA = '1' and JMP_BACKWARD = '0' then
+            counter <= counter + jump_value;
+         elsif LD_JMP_VALUE = '1' then
+            jump_value <= unsigned(NEW_JMP_VALUE);
+         end if;
+      end if;
+   end process;
+   
+   OUT_PC <= std_logic_vector(counter);
+   
 end architecture;
