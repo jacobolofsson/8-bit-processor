@@ -53,7 +53,7 @@ begin
     stimuli : process
     begin
         wait for CLK_PERIOD*2;
-        assert RESULT = "00000000" and RES_GT = '0' and RES_Z = '0'
+        assert RESULT = "00000000" and RES_GT = '0' and RES_Z = '1'
         report "Error value after NOP"
         severity error;
 
@@ -61,7 +61,7 @@ begin
         LD_ACC <= '1';
         
         wait for CLK_PERIOD;
-        assert RESULT = "00000000" and RES_GT = '0' and RES_Z = '0'
+        assert RESULT = "11110000" and RES_GT = '0' and RES_Z = '0'
         report "Error value after NOP"
         severity error;
 
@@ -69,7 +69,7 @@ begin
         LD_TMP <= '1';
 
         wait for CLK_PERIOD;
-        assert RESULT = "00000000" and RES_GT = '0' and RES_Z = '0'
+        assert RESULT = "11110000" and RES_GT = '0' and RES_Z = '0'
         report "Error value after NOP"
         severity error;
         
@@ -79,14 +79,14 @@ begin
         OPERATION <= ALU_ADD;
 
         wait for CLK_PERIOD;
-        assert RESULT = "11111111" and RES_GT = '1' and RES_Z = '0'
+        assert RESULT = "11111111" and RES_GT = '0' and RES_Z = '0'
         report "Error value after ADD"
         severity error;
         
         OPERATION <= ALU_SUB;
         
         wait for CLK_PERIOD;
-        assert RESULT = "11100001" and RES_GT = '1' and RES_Z = '0'
+        assert RESULT = "11110000" and RES_GT = '0' and RES_Z = '0'
         report "Error value after SUB"
         severity error;
         
@@ -94,35 +94,35 @@ begin
         OPERATION <= ALU_INC;
         
         wait for CLK_PERIOD;
-        assert RESULT = "11110001" and RES_GT = '1' and RES_Z = '0'
+        assert RESULT = "11110001" and RES_GT = '0' and RES_Z = '0'
         report "Error value after INC"
         severity error;
         
         OPERATION <= ALU_DEC;
         
         wait for CLK_PERIOD;
-        assert RESULT = "11110000" and RES_GT = '1' and RES_Z = '0'
+        assert RESULT = "11110000" and RES_GT = '0' and RES_Z = '0'
         report "Error value after DEC"
         severity error;
         
         OPERATION <= ALU_RAL;
         
         wait for CLK_PERIOD;
-        assert RESULT = "11100001" and RES_GT = '1' and RES_Z = '0'
+        assert RESULT = "11100001" and RES_GT = '0' and RES_Z = '0'
         report "Error value after RAL"
         severity error;
         
         OPERATION <= ALU_RAR;
         
         wait for CLK_PERIOD;
-        assert RESULT = "11110000" and RES_GT = '1' and RES_Z = '0'
+        assert RESULT = "11110000" and RES_GT = '0' and RES_Z = '0'
         report "Error value after RAR"
         severity error;
 
         OPERATION <= ALU_SHL;
         
         wait for CLK_PERIOD;
-        assert RESULT = "11100000" and RES_GT = '1' and RES_Z = '0'
+        assert RESULT = "11100000" and RES_GT = '0' and RES_Z = '0'
         report "Error value after SHL"
         severity error;
         

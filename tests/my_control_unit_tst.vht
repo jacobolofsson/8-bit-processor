@@ -21,7 +21,6 @@ architecture test of my_control_unit_TST is
               ALU_OP_ENA      : out std_logic;
               ALU_LD_ACC      : out std_logic;
               ALU_LD_TEMP     : out std_logic;
-              ALU_INC_ACC     : out std_logic;
               LC_LD           : out std_logic;
               LC_DEC          : out std_logic;
               PC_INC          : out std_logic;
@@ -50,7 +49,6 @@ architecture test of my_control_unit_TST is
     signal ALU_OP_ENA      : std_logic;
     signal ALU_LD_ACC      : std_logic;
     signal ALU_LD_TEMP     : std_logic;
-    signal ALU_INC_ACC     : std_logic;
     signal LC_LD           : std_logic;
     signal LC_DEC          : std_logic;
     signal PC_INC          : std_logic;
@@ -82,7 +80,6 @@ begin
               ALU_OP_ENA      => ALU_OP_ENA,
               ALU_LD_ACC      => ALU_LD_ACC,
               ALU_LD_TEMP     => ALU_LD_TEMP,
-              ALU_INC_ACC     => ALU_INC_ACC,
               LC_LD           => LC_LD,
               LC_DEC          => LC_DEC,
               PC_INC          => PC_INC,
@@ -108,7 +105,7 @@ begin
         wait for CLK_PERIOD;
         INSTRUCTION <= OP_LD_ADR2;
         wait for CLK_PERIOD;
-        INSTRUCITON <= OP_LD_ACC;
+        INSTRUCTION <= OP_LD_ACC;
         wait for CLK_PERIOD;
         INSTRUCTION <= OP_LD_TEMP;
         wait for CLK_PERIOD;
@@ -118,13 +115,30 @@ begin
         wait for CLK_PERIOD;
         INSTRUCTION <= OP_ST_ACC1;
         wait for CLK_PERIOD;
-        INSTRUCTION <= OP_LD_ACC2;
+        INSTRUCTION <= OP_ST_ACC2;
         wait for CLK_PERIOD;
         INSTRUCTION <= OP_JPF;  
         wait for CLK_PERIOD;
         INSTRUCTION <= OP_JPB;   
         wait for CLK_PERIOD;
         INSTRUCTION <= OP_JPF_G;
+        wait for CLK_PERIOD;
+        INSTRUCTION <= OP_JPB_G;
+        wait for CLK_PERIOD;
+        INSTRUCTION <= OP_JPF_Z;
+        wait for CLK_PERIOD;
+        INSTRUCTION <= OP_JPB_Z;
+        wait for CLK_PERIOD;
+        INSTRUCTION <= OP_JPF_LC;
+        wait for CLK_PERIOD;
+        INSTRUCTION <= OP_JPB_LC;
+        wait for CLK_PERIOD;
+        INSTRUCTION <= OP_JPF_G;
+
+        ALU_GT <= '1';
+        ALU_Z <= '1';
+        LC_Z  <= '1';
+
         wait for CLK_PERIOD;
         INSTRUCTION <= OP_JPB_G;
         wait for CLK_PERIOD;
@@ -171,7 +185,6 @@ begin
                        ALU_OP_ENA      = '0' and
                        ALU_LD_ACC      = '0' and
                        ALU_LD_TEMP     = '0' and     
-                       ALU_INC_ACC     = '0' and   
                        LC_LD           = '0' and   
                        LC_DEC          = '0' and   
                        PC_INC          = '1' and   
@@ -190,9 +203,104 @@ begin
                 assert FETCH_NEXT = '1'
                 report "FETCH_NEXT /= 1 during execute"
                 severity error;
-            
+                
                 case INSTRUCTION is
-                    when OP_LD_ADR1 
+                                                
+when OP_LD_ADR1    => assert DATA_BUS_SEL = SEL_D_MEM report "DATA_BUS_SEL  wrong when instr = OP_LD_ADR1";
+                      assert ADDR_BUS_SEL = SEL_A_PC report "ADDR_BUS_SEL  wrong when instr = OP_LD_ADR1";
+                      assert PC_INC = '1' report "PC_INC = 0 when instr = OP_LD_ADR1";
+                      assert ADR1_LD= '1' report "ADR1_LD= 0 when instr = OP_LD_ADR1";
+when OP_LD_ADR2    => assert DATA_BUS_SEL = SEL_D_MEM report "DATA_BUS_SEL  wrong when instr = OP_LD_ADR2";
+                      assert ADDR_BUS_SEL = SEL_A_PC report "ADDR_BUS_SEL  wrong when instr = OP_LD_ADR2";
+                      assert PC_INC = '1' report "PC_INC = 0 when instr = OP_LD_ADR2";
+                      assert ADR2_LD= '1' report "ADR2_LD= 0 when instr = OP_LD_ADR2";    
+when OP_LD_ACC     => assert DATA_BUS_SEL = SEL_D_MEM report "DATA_BUS_SEL  wrong when instr = OP_LD_ACC";
+                      assert ADDR_BUS_SEL = SEL_A_ADR1 report "ADDR_BUS_SEL  wrong when instr = OP_LD_ACC";
+                      assert ALU_LD_ACC = '1' report "ALU_LD_ACC = 0 when instr = OP_LD_ACC";                                    
+when OP_LD_TEMP    => assert DATA_BUS_SEL = SEL_D_MEM report "DATA_BUS_SEL  wrong when instr = OP_LD_TEMP";
+                      assert ADDR_BUS_SEL = SEL_A_ADR2 report "ADDR_BUS_SEL  wrong when instr = OP_LD_TEMP";
+                      assert ALU_LD_TEMP= '1' report "ALU_LD_TEMP= 0 when instr = OP_LD_TEMP";                               
+when OP_LD_LC      => assert DATA_BUS_SEL = SEL_D_MEM report "DATA_BUS_SEL  wrong when instr = OP_LD_LC";
+                      assert ADDR_BUS_SEL = SEL_A_PC report "ADDR_BUS_SEL  wrong when instr = OP_LD_LC";
+                      assert LC_LD= '1' report "LC_LD= 0 when instr = OP_LD_LC";
+                      assert PC_INC = '1' report "PC_INC = 0 when instr = OP_LD_LC";                      
+when OP_LD_JUMPREG => assert DATA_BUS_SEL = SEL_D_MEM report "DATA_BUS_SEL  wrong when instr = OP_LD_JUMPREG";
+                      assert ADDR_BUS_SEL = SEL_A_PC report "ADDR_BUS_SEL  wrong when instr = OP_LD_JUMPREG";
+                      assert PC_INC = '1' report "PC_INC = 0 when instr = OP_LD_JUMPREG";
+                      assert PC_JMP_LD= '1' report "PC_JMP_LD= 0 when instr = OP_LD_JUMPREG";                     
+when OP_ST_ACC1    => assert DATA_BUS_SEL = SEL_D_ALU report "DATA_BUS_SEL  wrong when instr = OP_ST_ACC1";
+                      assert ADDR_BUS_SEL = SEL_A_ADR1 report "ADDR_BUS_SEL  wrong when instr = OP_ST_ACC1";
+                      assert MEM_WRT_ENA= '1' report "MEM_WRT_ENA= 0 when instr = OP_ST_ACC1";
+when OP_ST_ACC2    => assert DATA_BUS_SEL = SEL_D_ALU report "DATA_BUS_SEL  wrong when instr = OP_ST_ACC2";
+                      assert ADDR_BUS_SEL = SEL_A_ADR2 report "ADDR_BUS_SEL  wrong when instr = OP_ST_ACC2";
+                      assert MEM_WRT_ENA= '1' report "MEM_WRT_ENA= 0 when instr = OP_ST_ACC2";
+
+when OP_JPF        => assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPF";
+when OP_JPB        => assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPB";
+                      assert PC_JMP_BACKWARD= '1' report "PC_JMP_BACKWARD= 0 when instr = OP_JPB";
+
+when OP_JPF_G =>  if ALU_GT = '1' then
+                     assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPF_G"; 
+                  else
+                     assert PC_JMP_ENA = '0' report "PC_JMP_ENA = 1 when instr = OP_JPF_G"; 
+                  end if;
+when OP_JPB_G =>  if ALU_GT = '1' then
+                     assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPB_G";
+                  else
+                     assert PC_JMP_ENA = '0' report "PC_JMP_ENA = 1 when instr = OP_JPB_G";
+                  end if;
+                  assert PC_JMP_BACKWARD= '1' report "PC_JMP_BACKWARD= 0 when instr = OP_JPB_G";
+when OP_JPF_Z =>  if ALU_Z = '1' then
+                      assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPF_Z"; 
+                  else
+                      assert PC_JMP_ENA = '0' report "PC_JMP_ENA = 1 when instr = OP_JPF_Z"; 
+                  end if;
+when OP_JPB_Z =>  if ALU_Z = '1' then
+                      assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPB_Z";
+                  else
+                      assert PC_JMP_ENA = '0' report "PC_JMP_ENA = 1 when instr = OP_JPB_Z";
+                  end if;
+                  assert PC_JMP_BACKWARD= '1' report "PC_JMP_BACKWARD= 0 when instr = OP_JPB_Z";
+when OP_JPF_LC => if LC_Z = '1' then
+                      assert LC_DEC = '0' report "LC_DEC = 1 when instr = OP_JPF_LC";
+                      assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPF_LC";   
+                  else
+                      assert LC_DEC = '1' report "LC_DEC = 0 when instr = OP_JPF_LC";
+                      assert PC_JMP_ENA = '0' report "PC_JMP_ENA = 1 when instr = OP_JPF_LC";   
+                  end if;
+when OP_JPB_LC => if LC_Z = '1' then
+                      assert LC_DEC = '0' report "LC_DEC = 1 when instr = OP_JPB_LC";
+                      assert PC_JMP_ENA = '1' report "PC_JMP_ENA = 0 when instr = OP_JPB_LC";
+                  else
+                      assert LC_DEC = '1' report "LC_DEC = 0 when instr = OP_JPB_LC";
+                      assert PC_JMP_ENA = '0' report "PC_JMP_ENA = 1 when instr = OP_JPB_LC";
+                  end if;
+                  assert PC_JMP_BACKWARD= '1' report "PC_JMP_BACKWARD= 0 when instr = OP_JPB_LC";
+
+when OP_INC_ADR1 => assert ADR1_INC = '1' report "ADR1_INC = 0 when instr = OP_INC_ADR1";
+when OP_INC_ADR2 => assert ADR2_INC = '1' report "ADR2_INC = 0 when instr = OP_INC_ADR2";
+
+when OP_CMP      => assert ALU_OPCODE = ALU_SUB report "ALU_OPCODE = 0 when instr = OP_CMP";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_CMP";
+when OP_ADD      => assert ALU_OPCODE = ALU_ADD report "ALU_OPCODE = 0 when instr = OP_ADD";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_ADD";
+when OP_SUB      => assert ALU_OPCODE = ALU_SUB report "ALU_OPCODE = 0 when instr = OP_SUB";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_SUB";
+when OP_INC      => assert ALU_OPCODE = ALU_INC report "ALU_OPCODE = 0 when instr = OP_INC";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_INC";
+when OP_DEC      => assert ALU_OPCODE = ALU_DEC report "ALU_OPCODE = 0 when instr = OP_DEC";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_DEC";
+when OP_RAL      => assert ALU_OPCODE = ALU_RAL report "ALU_OPCODE = 0 when instr = OP_RAL";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_RAL";
+when OP_RAR      => assert ALU_OPCODE = ALU_RAR report "ALU_OPCODE = 0 when instr = OP_RAR";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_RAR";
+when OP_SHL      => assert ALU_OPCODE = ALU_SHL report "ALU_OPCODE = 0 when instr = OP_SHL";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_SHL";
+when OP_SHR      => assert ALU_OPCODE = ALU_SHR report "ALU_OPCODE = 0 when instr = OP_SHR";
+                    assert ALU_OP_ENA = '1' report "ALU_OP_ENA = 0 when instr = OP_SHR";
+
+when others      => assert false report "Not allowed instruction";
+end case;
             end if;
         end if;
     end process;

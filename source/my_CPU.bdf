@@ -344,23 +344,16 @@ applicable agreement for further details.
 	(port
 		(pt 0 112)
 		(input)
-		(text "INC_ACC" (rect 0 0 49 12)(font "Arial" ))
-		(text "INC_ACC" (rect 21 107 70 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112))
+		(text "NEW_ACC[7..0]" (rect 0 0 81 12)(font "Arial" ))
+		(text "NEW_ACC[7..0]" (rect 21 107 102 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
 		(pt 0 128)
 		(input)
-		(text "NEW_ACC[7..0]" (rect 0 0 81 12)(font "Arial" ))
-		(text "NEW_ACC[7..0]" (rect 21 123 102 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128)(line_width 3))
-	)
-	(port
-		(pt 0 144)
-		(input)
 		(text "NEW_TMP[7..0]" (rect 0 0 79 12)(font "Arial" ))
-		(text "NEW_TMP[7..0]" (rect 21 139 100 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144)(line_width 3))
+		(text "NEW_TMP[7..0]" (rect 21 123 100 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
 	(port
 		(pt 240 32)
@@ -467,9 +460,9 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect -200 -88 96 280)
+	(rect -200 -88 96 248)
 	(text "my_control_unit" (rect 5 0 84 12)(font "Arial" ))
-	(text "inst7" (rect 8 352 31 364)(font "Arial" ))
+	(text "inst7" (rect 8 320 31 332)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -564,96 +557,89 @@ applicable agreement for further details.
 	(port
 		(pt 296 128)
 		(output)
-		(text "ALU_INC_ACC" (rect 0 0 76 12)(font "Arial" ))
-		(text "ALU_INC_ACC" (rect 211 123 275 135)(font "Arial" ))
+		(text "LC_LD" (rect 0 0 34 12)(font "Arial" ))
+		(text "LC_LD" (rect 247 123 275 135)(font "Arial" ))
 		(line (pt 296 128)(pt 280 128))
 	)
 	(port
 		(pt 296 144)
 		(output)
-		(text "LC_LD" (rect 0 0 34 12)(font "Arial" ))
-		(text "LC_LD" (rect 247 139 275 151)(font "Arial" ))
+		(text "LC_DEC" (rect 0 0 43 12)(font "Arial" ))
+		(text "LC_DEC" (rect 239 139 275 151)(font "Arial" ))
 		(line (pt 296 144)(pt 280 144))
 	)
 	(port
 		(pt 296 160)
 		(output)
-		(text "LC_DEC" (rect 0 0 43 12)(font "Arial" ))
-		(text "LC_DEC" (rect 239 155 275 167)(font "Arial" ))
+		(text "PC_INC" (rect 0 0 41 12)(font "Arial" ))
+		(text "PC_INC" (rect 241 155 275 167)(font "Arial" ))
 		(line (pt 296 160)(pt 280 160))
 	)
 	(port
 		(pt 296 176)
 		(output)
-		(text "PC_INC" (rect 0 0 41 12)(font "Arial" ))
-		(text "PC_INC" (rect 241 171 275 183)(font "Arial" ))
+		(text "PC_JMP_LD" (rect 0 0 62 12)(font "Arial" ))
+		(text "PC_JMP_LD" (rect 223 171 275 183)(font "Arial" ))
 		(line (pt 296 176)(pt 280 176))
 	)
 	(port
 		(pt 296 192)
 		(output)
-		(text "PC_JMP_LD" (rect 0 0 62 12)(font "Arial" ))
-		(text "PC_JMP_LD" (rect 223 187 275 199)(font "Arial" ))
+		(text "PC_JMP_ENA" (rect 0 0 71 12)(font "Arial" ))
+		(text "PC_JMP_ENA" (rect 215 187 275 199)(font "Arial" ))
 		(line (pt 296 192)(pt 280 192))
 	)
 	(port
 		(pt 296 208)
 		(output)
-		(text "PC_JMP_ENA" (rect 0 0 71 12)(font "Arial" ))
-		(text "PC_JMP_ENA" (rect 215 203 275 215)(font "Arial" ))
+		(text "PC_JMP_BACKWARD" (rect 0 0 112 12)(font "Arial" ))
+		(text "PC_JMP_BACKWARD" (rect 181 203 275 215)(font "Arial" ))
 		(line (pt 296 208)(pt 280 208))
 	)
 	(port
 		(pt 296 224)
 		(output)
-		(text "PC_JMP_BACKWARD" (rect 0 0 112 12)(font "Arial" ))
-		(text "PC_JMP_BACKWARD" (rect 181 219 275 231)(font "Arial" ))
+		(text "ADR1_LD" (rect 0 0 49 12)(font "Arial" ))
+		(text "ADR1_LD" (rect 234 219 275 231)(font "Arial" ))
 		(line (pt 296 224)(pt 280 224))
 	)
 	(port
 		(pt 296 240)
 		(output)
-		(text "ADR1_LD" (rect 0 0 49 12)(font "Arial" ))
-		(text "ADR1_LD" (rect 234 235 275 247)(font "Arial" ))
+		(text "ADR1_INC" (rect 0 0 55 12)(font "Arial" ))
+		(text "ADR1_INC" (rect 229 235 275 247)(font "Arial" ))
 		(line (pt 296 240)(pt 280 240))
 	)
 	(port
 		(pt 296 256)
 		(output)
-		(text "ADR1_INC" (rect 0 0 55 12)(font "Arial" ))
-		(text "ADR1_INC" (rect 229 251 275 263)(font "Arial" ))
+		(text "ADR2_LD" (rect 0 0 49 12)(font "Arial" ))
+		(text "ADR2_LD" (rect 234 251 275 263)(font "Arial" ))
 		(line (pt 296 256)(pt 280 256))
 	)
 	(port
 		(pt 296 272)
 		(output)
-		(text "ADR2_LD" (rect 0 0 49 12)(font "Arial" ))
-		(text "ADR2_LD" (rect 234 267 275 279)(font "Arial" ))
+		(text "ADR2_INC" (rect 0 0 55 12)(font "Arial" ))
+		(text "ADR2_INC" (rect 229 267 275 279)(font "Arial" ))
 		(line (pt 296 272)(pt 280 272))
 	)
 	(port
 		(pt 296 288)
 		(output)
-		(text "ADR2_INC" (rect 0 0 55 12)(font "Arial" ))
-		(text "ADR2_INC" (rect 229 283 275 295)(font "Arial" ))
+		(text "MEM_WRT_ENA" (rect 0 0 83 12)(font "Arial" ))
+		(text "MEM_WRT_ENA" (rect 205 283 275 295)(font "Arial" ))
 		(line (pt 296 288)(pt 280 288))
 	)
 	(port
 		(pt 296 304)
 		(output)
-		(text "MEM_WRT_ENA" (rect 0 0 83 12)(font "Arial" ))
-		(text "MEM_WRT_ENA" (rect 205 299 275 311)(font "Arial" ))
+		(text "FETCH_NEXT" (rect 0 0 69 12)(font "Arial" ))
+		(text "FETCH_NEXT" (rect 217 299 275 311)(font "Arial" ))
 		(line (pt 296 304)(pt 280 304))
 	)
-	(port
-		(pt 296 320)
-		(output)
-		(text "FETCH_NEXT" (rect 0 0 69 12)(font "Arial" ))
-		(text "FETCH_NEXT" (rect 217 315 275 327)(font "Arial" ))
-		(line (pt 296 320)(pt 280 320))
-	)
 	(drawing
-		(rectangle (rect 16 16 280 352))
+		(rectangle (rect 16 16 280 320))
 	)
 )
 (connector
@@ -796,11 +782,6 @@ applicable agreement for further details.
 	(pt 256 568)
 )
 (connector
-	(pt 216 -144)
-	(pt 216 200)
-	(bus)
-)
-(connector
 	(pt 216 488)
 	(pt 216 616)
 	(bus)
@@ -925,43 +906,15 @@ applicable agreement for further details.
 	(pt 600 656)
 )
 (connector
-	(pt 200 168)
-	(pt 200 56)
-)
-(connector
-	(pt 184 296)
-	(pt 184 88)
-)
-(connector
 	(pt 256 312)
 	(pt 176 312)
-)
-(connector
-	(pt 176 312)
-	(pt 176 104)
-)
-(connector
-	(pt 168 120)
-	(pt 168 328)
-)
-(connector
-	(pt 160 136)
-	(pt 160 344)
 )
 (connector
 	(pt 256 456)
 	(pt 152 456)
 )
 (connector
-	(pt 152 456)
-	(pt 152 152)
-)
-(connector
 	(pt 256 472)
-	(pt 144 472)
-)
-(connector
-	(pt 144 168)
 	(pt 144 472)
 )
 (connector
@@ -969,44 +922,16 @@ applicable agreement for further details.
 	(pt 136 584)
 )
 (connector
-	(pt 136 184)
-	(pt 136 584)
-)
-(connector
 	(pt 256 600)
 	(pt 128 600)
-)
-(connector
-	(pt 128 600)
-	(pt 128 200)
 )
 (connector
 	(pt 600 656)
 	(pt 120 656)
 )
 (connector
-	(pt 120 216)
-	(pt 120 656)
-)
-(connector
-	(pt 96 232)
-	(pt 104 232)
-)
-(connector
-	(pt 104 304)
-	(pt -208 304)
-)
-(connector
-	(pt -208 304)
-	(pt -208 40)
-)
-(connector
 	(pt -208 40)
 	(pt -200 40)
-)
-(connector
-	(pt 104 232)
-	(pt 104 304)
 )
 (connector
 	(pt -288 -192)
@@ -1058,50 +983,6 @@ applicable agreement for further details.
 	(pt 256 24)
 )
 (connector
-	(pt 96 40)
-	(pt 256 40)
-)
-(connector
-	(pt 96 56)
-	(pt 200 56)
-)
-(connector
-	(pt 96 88)
-	(pt 184 88)
-)
-(connector
-	(pt 96 104)
-	(pt 176 104)
-)
-(connector
-	(pt 96 120)
-	(pt 168 120)
-)
-(connector
-	(pt 96 136)
-	(pt 160 136)
-)
-(connector
-	(pt 96 152)
-	(pt 152 152)
-)
-(connector
-	(pt 96 168)
-	(pt 144 168)
-)
-(connector
-	(pt 96 184)
-	(pt 136 184)
-)
-(connector
-	(pt 96 200)
-	(pt 128 200)
-)
-(connector
-	(pt 96 216)
-	(pt 120 216)
-)
-(connector
 	(pt -320 -192)
 	(pt -288 -192)
 )
@@ -1112,14 +993,6 @@ applicable agreement for further details.
 (connector
 	(pt 256 184)
 	(pt 192 184)
-)
-(connector
-	(pt 192 184)
-	(pt 192 72)
-)
-(connector
-	(pt 96 72)
-	(pt 192 72)
 )
 (connector
 	(pt 512 -8)
@@ -1150,6 +1023,135 @@ applicable agreement for further details.
 	(pt 632 -40)
 	(bus)
 )
+(connector
+	(pt 216 56)
+	(pt 256 56)
+	(bus)
+)
+(connector
+	(pt 216 40)
+	(pt 256 40)
+	(bus)
+)
+(connector
+	(pt 216 56)
+	(pt 216 200)
+	(bus)
+)
+(connector
+	(pt 216 -144)
+	(pt 216 40)
+	(bus)
+)
+(connector
+	(pt 216 40)
+	(pt 216 56)
+	(bus)
+)
+(connector
+	(pt 96 40)
+	(pt 200 40)
+)
+(connector
+	(pt 200 40)
+	(pt 200 168)
+)
+(connector
+	(pt 96 56)
+	(pt 192 56)
+)
+(connector
+	(pt 192 56)
+	(pt 192 184)
+)
+(connector
+	(pt 96 72)
+	(pt 184 72)
+)
+(connector
+	(pt 184 72)
+	(pt 184 296)
+)
+(connector
+	(pt 96 88)
+	(pt 176 88)
+)
+(connector
+	(pt 176 88)
+	(pt 176 312)
+)
+(connector
+	(pt 96 104)
+	(pt 168 104)
+)
+(connector
+	(pt 168 104)
+	(pt 168 328)
+)
+(connector
+	(pt 96 120)
+	(pt 160 120)
+)
+(connector
+	(pt 160 120)
+	(pt 160 344)
+)
+(connector
+	(pt 152 136)
+	(pt 152 456)
+)
+(connector
+	(pt 96 136)
+	(pt 152 136)
+)
+(connector
+	(pt 96 152)
+	(pt 144 152)
+)
+(connector
+	(pt 144 152)
+	(pt 144 472)
+)
+(connector
+	(pt 96 168)
+	(pt 136 168)
+)
+(connector
+	(pt 136 168)
+	(pt 136 584)
+)
+(connector
+	(pt 96 184)
+	(pt 128 184)
+)
+(connector
+	(pt 128 184)
+	(pt 128 600)
+)
+(connector
+	(pt 96 200)
+	(pt 120 200)
+)
+(connector
+	(pt 120 200)
+	(pt 120 656)
+)
+(connector
+	(pt 96 216)
+	(pt 104 216)
+)
+(connector
+	(pt 104 264)
+	(pt -208 264)
+)
+(connector
+	(pt -208 40)
+	(pt -208 264)
+)
+(connector
+	(pt 104 216)
+	(pt 104 264)
+)
 (junction (pt 216 -144))
 (junction (pt 224 -40))
 (junction (pt 864 -56))
@@ -1160,3 +1162,5 @@ applicable agreement for further details.
 (junction (pt 224 152))
 (junction (pt 216 360))
 (junction (pt -288 -192))
+(junction (pt 216 56))
+(junction (pt 216 40))

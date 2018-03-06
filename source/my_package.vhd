@@ -41,7 +41,7 @@ package my_package is
    constant OP_LD_LC      : my_bus_type := b"0000_0101";
    constant OP_LD_JUMPREG : my_bus_type := b"0000_0110";
    constant OP_ST_ACC1    : my_bus_type := b"0000_0111";
-   constant OP_LD_ACC2    : my_bus_type := b"0000_1000";
+   constant OP_ST_ACC2    : my_bus_type := b"0000_1000";
    
    -- Opcodes: Jump and adress modifications
    constant OP_JPF        : my_bus_type := b"0000_1001";  

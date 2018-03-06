@@ -19,7 +19,6 @@ entity my_control_unit is
       ALU_OP_ENA      : out std_logic;
       ALU_LD_ACC      : out std_logic;
       ALU_LD_TEMP     : out std_logic;
-      ALU_INC_ACC     : out std_logic;
       
       LC_LD           : out std_logic;
       LC_DEC          : out std_logic;
