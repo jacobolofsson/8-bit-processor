@@ -28,11 +28,11 @@ entity my_control_unit is
       PC_JMP_ENA      : out std_logic;
       PC_JMP_BACKWARD : out std_logic;
       
-      ADR1_LD         : out std_logic;
       ADR1_INC        : out std_logic;
+      ADR1_LD         : out std_logic;
       
-      ADR2_LD         : out std_logic;
       ADR2_INC        : out std_logic;
+      ADR2_LD         : out std_logic;
       
       MEM_WRT_ENA     : out std_logic;
       
@@ -41,13 +41,12 @@ entity my_control_unit is
 end entity;
 
 architecture rtl of my_control_unit is
-   --signal fetch_instruction : std_logic := '1';
    signal current_instruction : my_bus_type := (others => '0');
 begin
    process (CLK, RESET)
    begin
-      if RESET = '1' then
-         FETCH_NEXT <= '1';
+      if RESET = RST_VAL then
+         FETCH_NEXT <= '0';
          current_instruction <= OP_NOP;
       elsif rising_edge(CLK) then
          DATA_BUS_SEL    <= SEL_D_NOP;
@@ -62,10 +61,10 @@ begin
          PC_JMP_LD       <= '0';
          PC_JMP_ENA      <= '0';
          PC_JMP_BACKWARD <= '0';
-         ADR1_LD         <= '0';
          ADR1_INC        <= '0';
-         ADR2_LD         <= '0';
+         ADR1_LD         <= '0';
          ADR2_INC        <= '0';
+         ADR2_LD         <= '0';
          MEM_WRT_ENA     <= '0';
          
          if FETCH_CURRENT = '1' then

@@ -6,6 +6,7 @@ use work.my_package.all;
 entity my_ALU is
    port (
       CLK       : in std_logic;
+      RESET     : in std_logic;
       OPERATION : in my_ALU_op_type;
       OP_ENA    : in std_logic;
       LD_ACC    : in std_logic;
@@ -21,7 +22,7 @@ end entity;
 architecture rtl of my_ALU is
    signal temporary   : signed(REG_WIDTH-1 downto 0) := (others => '0');
    signal accumulator : signed(REG_WIDTH-1 downto 0) := (others => '0');
-   signal res         : signed(REG_WIDTH-1 downto 0) := (others => '0');
+   signal res         : signed(REG_WIDTH-1 downto 0);
 begin
    with OPERATION select
       res <= accumulator + temporary when ALU_ADD,
@@ -34,9 +35,12 @@ begin
              '0' & accumulator(REG_WIDTH-1 downto 1) when ALU_SHR,
              accumulator when others;
 
-   process (CLK)
+   process (CLK, RESET)
    begin
-      if rising_edge(CLK) then
+      if RESET = RST_VAL then
+         temporary   <= (others => '0');
+         accumulator <= (others => '0');
+      elsif rising_edge(CLK) then
          if OP_ENA = '1' then
             accumulator <= res;
          elsif LD_ACC = '1' then

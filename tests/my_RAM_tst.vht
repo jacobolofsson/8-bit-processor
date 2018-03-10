@@ -10,6 +10,7 @@ architecture test of my_RAM_TST is
     component my_ram
         port (
           CLK       : in std_logic;
+          RESET     : in std_logic;
           WRITE_ENA : in std_logic;
           ADDRESS   : in my_bus_type;
           DATA_IN   : in my_bus_type;
@@ -18,6 +19,7 @@ architecture test of my_RAM_TST is
     end component;
 
     signal CLK       : std_logic := '0';
+    signal RESET     : std_logic;
     signal WRITE_ENA : std_logic := '0';
     signal ADDRESS   : my_bus_type := "00001111";
     signal DATA_IN   : my_bus_type := "10101010";
@@ -30,6 +32,7 @@ begin
     dut : my_ram
     port map (
           CLK       => CLK,
+          RESET     => RESET,
           WRITE_ENA => WRITE_ENA,
           ADDRESS   => ADDRESS,
           DATA_IN   => DATA_IN,
@@ -38,7 +41,9 @@ begin
 
    stimuli : process
     begin
+        RESET <= '0';
         wait for CLK_PERIOD*2;
+        RESET <= '1';
         assert DATA_OUT = "00000000"
         report "Data not 0000_0000 at init"
         severity warning;

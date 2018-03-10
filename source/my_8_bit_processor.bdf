@@ -52,9 +52,9 @@ applicable agreement for further details.
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
 )
 (symbol
-	(rect 664 56 912 168)
+	(rect 664 40 912 184)
 	(text "my_ram" (rect 5 0 46 12)(font "Arial" ))
-	(text "inst" (rect 8 96 25 108)(font "Arial" ))
+	(text "inst" (rect 8 128 25 140)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -65,23 +65,30 @@ applicable agreement for further details.
 	(port
 		(pt 0 48)
 		(input)
-		(text "ADDRESS[7..0]" (rect 0 0 79 12)(font "Arial" ))
-		(text "ADDRESS[7..0]" (rect 21 43 100 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
+		(text "RESET" (rect 0 0 35 12)(font "Arial" ))
+		(text "RESET" (rect 21 43 56 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "DATA_IN[7..0]" (rect 0 0 71 12)(font "Arial" ))
-		(text "DATA_IN[7..0]" (rect 21 59 92 71)(font "Arial" ))
+		(text "ADDRESS[7..0]" (rect 0 0 79 12)(font "Arial" ))
+		(text "ADDRESS[7..0]" (rect 21 59 100 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
 		(pt 0 80)
 		(input)
+		(text "DATA_IN[7..0]" (rect 0 0 71 12)(font "Arial" ))
+		(text "DATA_IN[7..0]" (rect 21 75 92 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
 		(text "WRITE_ENA" (rect 0 0 64 12)(font "Arial" ))
-		(text "WRITE_ENA" (rect 21 75 85 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
+		(text "WRITE_ENA" (rect 21 91 85 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
 	)
 	(port
 		(pt 248 32)
@@ -91,7 +98,7 @@ applicable agreement for further details.
 		(line (pt 248 32)(pt 232 32)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 232 96))
+		(rectangle (rect 16 16 232 128))
 	)
 )
 (symbol
@@ -145,37 +152,32 @@ applicable agreement for further details.
 	)
 )
 (connector
-	(pt 224 120)
-	(pt 352 120)
-)
-(connector
-	(pt 920 88)
 	(pt 920 184)
+	(pt 336 184)
 	(bus)
 )
 (connector
+	(pt 336 136)
 	(pt 352 136)
-	(pt 336 136)
 	(bus)
 )
 (connector
-	(pt 336 136)
 	(pt 336 184)
+	(pt 336 136)
 	(bus)
 )
 (connector
 	(pt 920 184)
-	(pt 336 184)
+	(pt 920 72)
 	(bus)
 )
 (connector
-	(pt 664 104)
-	(pt 624 104)
-	(bus)
+	(pt 648 72)
+	(pt 664 72)
 )
 (connector
-	(pt 624 120)
-	(pt 664 120)
+	(pt 920 72)
+	(pt 912 72)
 	(bus)
 )
 (connector
@@ -183,32 +185,58 @@ applicable agreement for further details.
 	(pt 664 136)
 )
 (connector
+	(pt 648 72)
+	(pt 648 40)
+)
+(connector
+	(pt 328 120)
+	(pt 328 56)
+)
+(connector
+	(pt 328 56)
+	(pt 640 56)
+)
+(connector
+	(pt 224 120)
+	(pt 328 120)
+)
+(connector
+	(pt 328 120)
+	(pt 352 120)
+)
+(connector
+	(pt 640 56)
+	(pt 640 88)
+)
+(connector
+	(pt 640 88)
 	(pt 664 88)
-	(pt 648 88)
 )
 (connector
-	(pt 648 88)
-	(pt 648 56)
+	(pt 648 40)
+	(pt 320 40)
 )
 (connector
-	(pt 648 56)
-	(pt 336 56)
-)
-(connector
-	(pt 336 56)
-	(pt 336 104)
+	(pt 320 104)
+	(pt 320 40)
 )
 (connector
 	(pt 224 104)
-	(pt 336 104)
+	(pt 320 104)
 )
 (connector
-	(pt 336 104)
+	(pt 320 104)
 	(pt 352 104)
 )
 (connector
-	(pt 912 88)
-	(pt 920 88)
+	(pt 624 104)
+	(pt 664 104)
 	(bus)
 )
-(junction (pt 336 104))
+(connector
+	(pt 624 120)
+	(pt 664 120)
+	(bus)
+)
+(junction (pt 328 120))
+(junction (pt 320 104))

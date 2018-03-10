@@ -4,6 +4,8 @@ use ieee.std_logic_1164.all;
 package my_package is
    constant REG_WIDTH : integer := 8;
    
+   constant RST_VAL : std_logic := '0';
+   
    subtype my_bus_type is std_logic_vector(REG_WIDTH-1 downto 0);
    
    -- Operation select signal for the ALU
@@ -65,4 +67,44 @@ package my_package is
    constant OP_RAR        : my_bus_type := b"0001_1001";
    constant OP_SHL        : my_bus_type := b"0001_1010";
    constant OP_SHR        : my_bus_type := b"0001_1011";
+   
+   -- Memory types and constants
+   constant MEMORY_DEPTH : integer := 8;
+   type my_mem_type is array( (2**MEMORY_DEPTH - 1) downto 0 ) of my_bus_type;
+   
+   constant EMPTY_MEMORY : my_mem_type := ( others => (others => '0') );
+   constant TEST_PROGRAM : my_mem_type := (
+      -- A = B + C
+      0      => OP_LD_ADR1, --LD ADR1, B 
+      1      => X"FB",      --ADDR of B
+      2      => OP_LD_ADR2, --LD ADR2, C
+      3      => X"FC",      --ADDR of C
+      4      => OP_LD_ACC,  --ACC = B
+      5      => OP_LD_TEMP, --TMP = C
+      6      => OP_ADD,     --ACC = ACC+TMP = B+C
+      7      => OP_LD_ADR1, --LD ADR1, A
+      8      => X"FA",      --ADDR of A
+      9      => OP_ST_ACC1, --A = ACC = B+C
+      -- IF A > 0 THEN B = C
+      10     => OP_LD_JUMPREG,
+      11     => X"04",
+      12     => OP_JPF_G,   --IF A>0 skip jump to end
+      13     => OP_LD_JUMPREG,
+      14     => X"07",
+      15     => OP_JPF,     --Jump to end
+      16     => OP_LD_ADR1, --LD ADR1, C
+      17     => X"FC",      --ADDR of C
+      18     => OP_LD_ADR2, --LD ADR2, B
+      19     => X"FB",      --ADDR of B
+      20     => OP_LD_ACC,  --ACC = C
+      21     => OP_ST_ACC2, --B = ACC = C
+      22     => OP_LD_JUMPREG, --Start ininite loop
+      23     => X"02",
+      24     => OP_JPB,     --Ininite loop
+      -- End of program memory
+      -- Start of data memory
+      16#FB# => X"E0",    --B
+      16#FC# => X"05",    --C
+      others => OP_NOP
+   );
 end package;

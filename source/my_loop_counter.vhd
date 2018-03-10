@@ -6,6 +6,7 @@ use work.my_package.all;
 entity my_loop_counter is
    port (
       CLK             : in std_logic;
+      RESET           : in std_logic;
       LD_LOOP_VALUE   : in std_logic;
       DEC_LOOP_VALUE  : in std_logic;
       NEW_LOOP_VALUE  : in my_bus_type;
@@ -16,9 +17,11 @@ end entity;
 architecture rtl of my_loop_counter is
    signal loop_counter : unsigned(REG_WIDTH-1 downto 0) := (others => '1');
 begin
-   process (CLK)
+   process (CLK, RESET)
    begin
-      if rising_edge(CLK) then
+      if RESET = RST_VAL then
+         loop_counter <= (others => '1');
+      elsif rising_edge(CLK) then
          if LD_LOOP_VALUE = '1' then
             loop_counter <= unsigned(NEW_LOOP_VALUE);
          end if;

@@ -6,6 +6,7 @@ use work.my_package.all;
 entity my_program_counter is
    port (
       CLK           : in std_logic;
+      RESET         : in std_logic;
       INC_PC        : in std_logic;
       LD_JMP_VALUE  : in std_logic;
       JMP_ENA       : in std_logic;
@@ -19,9 +20,12 @@ architecture rtl of my_program_counter is
    signal jump_value : unsigned(REG_WIDTH-1 downto 0) := (others => '0');
    signal counter    : unsigned(REG_WIDTH-1 downto 0) := (others => '0');
 begin
-   process (CLK)
+   process (CLK, RESET)
    begin
-      if rising_edge(CLK) then
+      if RESET = RST_VAL then
+         jump_value <= (others => '0');
+         counter <= (others => '0');
+      elsif rising_edge(CLK) then
          if INC_PC = '1' then
             counter <= counter + 1;
          elsif JMP_ENA = '1' and JMP_BACKWARD = '1' then
