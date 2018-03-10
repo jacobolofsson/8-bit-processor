@@ -28,11 +28,14 @@ begin
       elsif rising_edge(CLK) then
          if INC_PC = '1' then
             counter <= counter + 1;
-         elsif JMP_ENA = '1' and JMP_BACKWARD = '1' then
-            counter <= counter - jump_value;
-         elsif JMP_ENA = '1' and JMP_BACKWARD = '0' then
-            counter <= counter + jump_value;
-         elsif LD_JMP_VALUE = '1' then
+         elsif JMP_ENA = '1' then
+            if JMP_BACKWARD = '1' then
+               counter <= counter - jump_value;
+            else
+               counter <= counter + jump_value;
+            end if;
+         end if;
+         if LD_JMP_VALUE = '1' then
             jump_value <= unsigned(NEW_JMP_VALUE);
          end if;
       end if;

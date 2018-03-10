@@ -24,9 +24,8 @@ begin
       elsif rising_edge(CLK) then
          if LD_LOOP_VALUE = '1' then
             loop_counter <= unsigned(NEW_LOOP_VALUE);
-         end if;
-         if DEC_LOOP_VALUE = '1' then
-            loop_counter <= loop_counter -1;
+         elsif DEC_LOOP_VALUE = '1' then
+            loop_counter <= loop_counter - 1;
          end if;
      end if;
    end process;

@@ -75,36 +75,36 @@ package my_package is
    constant EMPTY_MEMORY : my_mem_type := ( others => (others => '0') );
    constant TEST_PROGRAM : my_mem_type := (
       -- A = B + C
-      0      => OP_LD_ADR1, --LD ADR1, B 
+      0      => OP_LD_ADR1, --ADR1 = ADDR of B 
       1      => X"FB",      --ADDR of B
-      2      => OP_LD_ADR2, --LD ADR2, C
+      2      => OP_LD_ADR2, --ADR2 = ADDR of C
       3      => X"FC",      --ADDR of C
       4      => OP_LD_ACC,  --ACC = B
       5      => OP_LD_TEMP, --TMP = C
       6      => OP_ADD,     --ACC = ACC+TMP = B+C
-      7      => OP_LD_ADR1, --LD ADR1, A
+      7      => OP_LD_ADR1, --ADR1 = ADDR of A
       8      => X"FA",      --ADDR of A
       9      => OP_ST_ACC1, --A = ACC = B+C
       -- IF A > 0 THEN B = C
       10     => OP_LD_JUMPREG,
-      11     => X"04",
-      12     => OP_JPF_G,   --IF A>0 skip jump to end
+      11     => X"03",
+      12     => OP_JPF_G,   --IF ACC>0, skip next 3 instructions
       13     => OP_LD_JUMPREG,
       14     => X"07",
       15     => OP_JPF,     --Jump to end
-      16     => OP_LD_ADR1, --LD ADR1, C
+      16     => OP_LD_ADR1, --ADR1 = ADDR of C
       17     => X"FC",      --ADDR of C
-      18     => OP_LD_ADR2, --LD ADR2, B
+      18     => OP_LD_ADR2, --ADR2 = ADDR of B
       19     => X"FB",      --ADDR of B
       20     => OP_LD_ACC,  --ACC = C
       21     => OP_ST_ACC2, --B = ACC = C
-      22     => OP_LD_JUMPREG, --Start ininite loop
-      23     => X"02",
-      24     => OP_JPB,     --Ininite loop
+      22     => OP_LD_JUMPREG, --Start of infinite loop
+      23     => X"01",
+      24     => OP_JPB,     --End of infinite loop
       -- End of program memory
       -- Start of data memory
-      16#FB# => X"E0",    --B
-      16#FC# => X"05",    --C
+      16#FB# => X"07",      --B
+      16#FC# => X"05",      --C
       others => OP_NOP
    );
 end package;

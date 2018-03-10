@@ -9,6 +9,7 @@ architecture test of my_program_counter_TST is
     component my_program_counter is
        port (
           CLK           : in std_logic;
+          RESET         : in std_logic;
           INC_PC        : in std_logic;
           LD_JMP_VALUE  : in std_logic;
           JMP_ENA       : in std_logic;
@@ -19,6 +20,7 @@ architecture test of my_program_counter_TST is
     end component;
 
     signal CLK           : std_logic := '0';
+    signal RESET         : std_logic := '0';
     signal INC_PC        : std_logic := '0';
     signal LD_JMP_VALUE  : std_logic := '0';
     signal JMP_ENA       : std_logic := '0';
@@ -33,6 +35,7 @@ begin
     dut : my_program_counter
     port map (
        CLK           => CLK, 
+       RESET         => RESET,
        INC_PC        => INC_PC,
        LD_JMP_VALUE  => LD_JMP_VALUE,
        JMP_ENA       => JMP_ENA,
@@ -44,6 +47,7 @@ begin
     stimuli : process
     begin
         wait for CLK_PERIOD*2;
+        RESET = '1';
         assert OUT_PC = "00000000"
         report "Start value for PC not 0000_0000"
         severity error;
@@ -59,27 +63,27 @@ begin
         report "PC /= 0000_0010 after 2 increments"
         severity error;
 
-        INC_PC <= '0';
+        INC_PC <= '1';
         LD_JMP_VALUE <= '1';
 
         wait for CLK_PERIOD;
-        assert OUT_PC = "00000010"
-        report "PC changed when INC_PC = 0 and JMP_ENA = 0"
+        assert OUT_PC = "00000011"
+        report "PC changed when loading new jump value"
         severity error;        
 
         LD_JMP_VALUE <= '0';
-        NEW_JMP_VALUE <= "10101010";
+        NEW_JMP_VALUE <= "10101011";
         JMP_ENA <= '1';
         
         wait for CLK_PERIOD;
-        assert OUT_PC = "11110010"
+        assert OUT_PC = "11110011"
         report "Jump forward failed"
         severity error;
 
         JMP_BACKWARD <= '1';
     
         wait for CLK_PERIOD;
-        assert OUT_PC <= "00000010"
+        assert OUT_PC <= "00000011"
         report "Jump backward failed"
         severity error;
         
