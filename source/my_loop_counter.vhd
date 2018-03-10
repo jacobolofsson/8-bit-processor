@@ -1,3 +1,14 @@
+-------------------------------------------------
+-- Author:   Jacob Olofsson
+-- Project:  My 8-bit processor
+-- URL:      github.com/mumsjacob/8-bit-processor
+-- Date:     2018-02-24
+-- File:     my_loop_counter.vhd
+--
+-- Abstract: The loop counter is loaded with an
+--           initial value and is counted down
+--           until zero.
+--------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;

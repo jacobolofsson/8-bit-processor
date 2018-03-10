@@ -1,3 +1,16 @@
+-------------------------------------------------
+-- Author:   Jacob Olofsson
+-- Project:  My 8-bit processor
+-- URL:      github.com/mumsjacob/8-bit-processor
+-- Date:     2018-02-24
+-- File:     my_program_counter.vhd
+--
+-- Abstract: The program counter is keeps track of
+--           the memory address of the next
+--           instruction. It is incremented after
+--           a new instruction is fetched or a
+--           jump is issued.
+--------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;

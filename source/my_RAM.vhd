@@ -1,3 +1,13 @@
+-------------------------------------------------
+-- Author:   Jacob Olofsson
+-- Project:  My 8-bit processor
+-- URL:      github.com/mumsjacob/8-bit-processor
+-- Date:     2018-02-24
+-- File:     my_RAM.vhd
+--
+-- Abstract: A bi-directional RAM for use with the
+--           CPU.
+--------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;

@@ -1,3 +1,15 @@
+-------------------------------------------------
+-- Author:   Jacob Olofsson
+-- Project:  My 8-bit processor
+-- URL:      github.com/mumsjacob/8-bit-processor
+-- Date:     2018-02-24
+-- File:     my_ALU.vhd
+--
+-- Abstract: The ALU contains two register that
+--           can be loaded. Different arithmetic
+--           operations can be performed on the
+--           registers.
+--------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;

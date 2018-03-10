@@ -1,3 +1,13 @@
+-------------------------------------------------
+-- Author:   Jacob Olofsson
+-- Project:  My 8-bit processor
+-- URL:      github.com/mumsjacob/8-bit-processor
+-- Date:     2018-02-24
+-- File:     my_data_mux.vhd
+--
+-- Abstract: Simple mux for selecting the data on
+--           data bus.
+--------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use work.my_package.all;

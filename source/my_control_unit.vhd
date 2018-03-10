@@ -1,3 +1,15 @@
+-------------------------------------------------
+-- Author:   Jacob Olofsson
+-- Project:  My 8-bit processor
+-- URL:      github.com/mumsjacob/8-bit-processor
+-- Date:     2018-02-24
+-- File:     my_control_unit.vhd
+--
+-- Abstract: The control unit takes the
+--           instruction, decodes it into control
+--           signals and sends them to all the
+--           component of the CPU.
+--------------------------------------------------
 library ieee;
 use ieee.std_logic_1164.all;
 use work.my_package.all;
@@ -5,37 +17,45 @@ use work.my_package.all;
 entity my_control_unit is
    port (
       CLK             : in std_logic;
-      RESET           : in std_logic; -- Reset all units w registers?
+      RESET           : in std_logic;
       ALU_GT          : in std_logic;
       ALU_Z           : in std_logic;
       LC_Z            : in std_logic;
       INSTRUCTION     : in my_bus_type;
       FETCH_CURRENT   : in std_logic;
       
+      -- Data and address mux control signals
       DATA_BUS_SEL    : out my_data_bus_sel_type;
       ADDR_BUS_SEL    : out my_addr_bus_sel_type;
       
+      -- ALU control signals
       ALU_OPCODE      : out my_ALU_op_type;
       ALU_OP_ENA      : out std_logic;
       ALU_LD_ACC      : out std_logic;
       ALU_LD_TEMP     : out std_logic;
       
+      -- Loop counter control signals
       LC_LD           : out std_logic;
       LC_DEC          : out std_logic;
       
+      -- Program counter control signals
       PC_INC          : out std_logic;
       PC_JMP_LD       : out std_logic;
       PC_JMP_ENA      : out std_logic;
       PC_JMP_BACKWARD : out std_logic;
       
+      -- Address register 1 control signals
       ADR1_INC        : out std_logic;
       ADR1_LD         : out std_logic;
       
+      -- Address register 2 control signals
       ADR2_INC        : out std_logic;
       ADR2_LD         : out std_logic;
       
+      -- Memory control signal
       MEM_WRT_ENA     : out std_logic;
       
+      -- Signal controls if next state is fetch or execute
       FETCH_NEXT      : out std_logic := '1'
    );
 end entity;
@@ -43,7 +63,7 @@ end entity;
 architecture rtl of my_control_unit is
    signal current_instruction : my_bus_type := (others => '0');
 begin
-   process (CLK, RESET)
+   update_state : process (CLK, RESET)
    begin
       if RESET = RST_VAL then
          FETCH_NEXT <= '0';
@@ -56,8 +76,9 @@ begin
       end if;
    end process;
    
-   process (current_instruction, FETCH_CURRENT)
+   update_outputs : process (current_instruction, FETCH_CURRENT)
    begin
+      -- Set default values
       DATA_BUS_SEL    <= SEL_D_NOP;
       ADDR_BUS_SEL    <= SEL_A_NOP;
       ALU_OPCODE      <= ALU_NOP;
@@ -75,7 +96,7 @@ begin
       ADR2_INC        <= '0';
       ADR2_LD         <= '0';
       MEM_WRT_ENA     <= '0';
-      
+      -- Update relevant outputs
       if FETCH_CURRENT = '1' then
          DATA_BUS_SEL <= SEL_D_MEM;
          ADDR_BUS_SEL <= SEL_A_PC;
@@ -123,20 +144,36 @@ begin
             when OP_JPB => PC_JMP_ENA <= '1';
                            PC_JMP_BACKWARD <= '1';
                             
-            when OP_JPF_G => if ALU_GT = '1' then PC_JMP_ENA <= '1'; end if;
+            when OP_JPF_G => if ALU_GT = '1' then
+                                PC_JMP_ENA <= '1';
+                            end if;
                             
-            when OP_JPB_G => if ALU_GT = '1' then PC_JMP_ENA <= '1'; end if;
+            when OP_JPB_G => if ALU_GT = '1' then
+                                PC_JMP_ENA <= '1';
+                             end if;
                              PC_JMP_BACKWARD <= '1';
                             
-            when OP_JPF_Z => if ALU_Z = '1' then PC_JMP_ENA <= '1'; end if;
+            when OP_JPF_Z => if ALU_Z = '1' then
+                                PC_JMP_ENA <= '1';
+                             end if;
                             
-            when OP_JPB_Z => if ALU_Z = '1' then PC_JMP_ENA <= '1'; end if;
+            when OP_JPB_Z => if ALU_Z = '1' then
+                                PC_JMP_ENA <= '1';
+                             end if;
                              PC_JMP_BACKWARD <= '1';
                             
-            when OP_JPF_LC => if LC_Z = '1' then PC_JMP_ENA <= '1'; else LC_DEC <= '1'; end if;
+            when OP_JPF_LC => if LC_Z = '1' then
+                                PC_JMP_ENA <= '1';
+                            else
+                                LC_DEC <= '1';
+                            end if;
                             
-            when OP_JPB_LC => if LC_Z = '1' then PC_JMP_ENA <= '1'; else LC_DEC <= '1'; end if;
-                             PC_JMP_BACKWARD <= '1';
+            when OP_JPB_LC => if LC_Z = '1' then
+                                PC_JMP_ENA <= '1';
+                            else
+                                LC_DEC <= '1';
+                            end if;
+                            PC_JMP_BACKWARD <= '1';
             
             when OP_INC_ADR1 => ADR1_INC <= '1';
             
