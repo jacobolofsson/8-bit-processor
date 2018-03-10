@@ -5,6 +5,7 @@ The project is divided into a memory and a processor at top level. The processor
 * An ALU
 * 2 adress registers
 * A loop counter
+
 All operations are made during two clock cycles, one "fetch" and one "execute" cycle.
 
 This design was made and tested using the Quartus II software with Altera cyclone II as target architecture but should work with other compilers and targets.
