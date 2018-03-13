@@ -95,9 +95,9 @@ begin
 
     stimuli : process
     begin
-        RESET <= '1';
-        wait for CLK_PERIOD;
         RESET <= '0';
+        wait for CLK_PERIOD;
+        RESET <= '1';
         wait for CLK_PERIOD;
 
         INSTRUCTION <= OP_LD_ADR1;

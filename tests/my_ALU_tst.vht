@@ -9,11 +9,11 @@ architecture test of my_ALU_TST is
 
     component my_ALU
         port (CLK       : in std_logic;
+              RESET     : in std_logic;
               OPERATION : in my_alu_op_type;
               OP_ENA    : in std_logic;
               LD_ACC    : in std_logic;
               LD_TMP    : in std_logic;
-              INC_ACC   : in std_logic;
               NEW_ACC   : in my_bus_type;
               NEW_TMP   : in my_bus_type;
               RESULT    : out my_bus_type;
@@ -22,11 +22,11 @@ architecture test of my_ALU_TST is
     end component;
 
     signal CLK       : std_logic := '0';
+    signal RESET     : std_logic := '1';
     signal OPERATION : my_alu_op_type := ALU_NOP;
     signal OP_ENA    : std_logic := '0';
     signal LD_ACC    : std_logic := '0';
     signal LD_TMP    : std_logic := '0';
-    signal INC_ACC   : std_logic := '0';
     signal NEW_ACC   : my_bus_type := "00000000";
     signal NEW_TMP   : my_bus_type := "00000000";
     signal RESULT    : my_bus_type;
@@ -39,11 +39,11 @@ begin
 
     dut : my_ALU
     port map (CLK       => CLK,
+              RESET     => RESET,
               OPERATION => OPERATION,
               OP_ENA    => OP_ENA,
               LD_ACC    => LD_ACC,
               LD_TMP    => LD_TMP,
-              INC_ACC   => INC_ACC,
               NEW_ACC   => NEW_ACC,
               NEW_TMP   => NEW_TMP,
               RESULT    => RESULT,
@@ -53,6 +53,7 @@ begin
     stimuli : process
     begin
         wait for CLK_PERIOD*2;
+        RESET <= '1';
         assert RESULT = "00000000" and RES_GT = '0' and RES_Z = '1'
         report "Error value after NOP"
         severity error;
