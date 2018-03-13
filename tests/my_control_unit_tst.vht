@@ -32,7 +32,7 @@ architecture test of my_control_unit_TST is
               ADR2_LD         : out std_logic;
               ADR2_INC        : out std_logic;
               MEM_WRT_ENA     : out std_logic;
-              FETCH_NEXT      : out std_logic);
+              EXECUTE_NEXT      : out std_logic);
     end component;
 
     signal CLK             : std_logic := '0';
@@ -60,7 +60,7 @@ architecture test of my_control_unit_TST is
     signal ADR2_LD         : std_logic;
     signal ADR2_INC        : std_logic;
     signal MEM_WRT_ENA     : std_logic;
-    signal FETCH_NEXT      : std_logic;
+    signal EXECUTE_NEXT      : std_logic;
 
     constant CLK_PERIOD : time := 50 ns;
 begin
@@ -91,7 +91,7 @@ begin
               ADR2_LD         => ADR2_LD,
               ADR2_INC        => ADR2_INC,
               MEM_WRT_ENA     => MEM_WRT_ENA,
-              FETCH_NEXT      => FETCH_NEXT);
+              EXECUTE_NEXT      => EXECUTE_NEXT);
 
     stimuli : process
     begin
@@ -294,12 +294,12 @@ begin
                        ADR2_LD         = '0' and
                        ADR2_INC        = '0' and
                        MEM_WRT_ENA     = '0' and
-                       FETCH_NEXT      = '0' 
+                       EXECUTE_NEXT      = '0' 
                 report "FETCH state error"
                 severity error;
             else
-                assert FETCH_NEXT = '1'
-                report "FETCH_NEXT /= 1 during execute"
+                assert EXECUTE_NEXT = '1'
+                report "EXECUTE_NEXT /= 1 during execute"
                 severity error;
                 
                 case INSTRUCTION is

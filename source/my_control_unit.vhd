@@ -56,7 +56,7 @@ entity my_control_unit is
       MEM_WRT_ENA     : out std_logic;
       
       -- Signal controls if next state is fetch or execute
-      FETCH_NEXT      : out std_logic := '1'
+      EXECUTE_NEXT      : out std_logic := '1'
    );
 end entity;
 
@@ -66,13 +66,13 @@ begin
    update_state : process (CLK, RESET)
    begin
       if RESET = RST_VAL then
-         FETCH_NEXT <= '0';
+         EXECUTE_NEXT <= '0';
          current_instruction <= OP_NOP;
       elsif rising_edge(CLK) then
          if FETCH_CURRENT = '1' then
             current_instruction <= INSTRUCTION;
          end if;
-         FETCH_NEXT <= not FETCH_CURRENT;
+         EXECUTE_NEXT <= not FETCH_CURRENT;
       end if;
    end process;
    
