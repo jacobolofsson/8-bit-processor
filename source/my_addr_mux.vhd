@@ -24,9 +24,9 @@ end entity;
 
 architecture rtl of my_addr_mux is
 begin
-    with SEL select
-        ADDR_BUS <= PC   when SEL_A_PC,
-                    ADR1 when SEL_A_ADR1,
-                    ADR2 when SEL_A_ADR2,
-                    (others => '0') when others;
+    with SEL select ADDR_BUS <=
+      PC             when SEL_A_PC,
+      ADR1           when SEL_A_ADR1,
+      ADR2           when SEL_A_ADR2,
+     (others => '0') when others;
 end architecture;

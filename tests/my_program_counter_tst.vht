@@ -47,7 +47,7 @@ begin
     stimuli : process
     begin
         wait for CLK_PERIOD*2;
-        RESET = '1';
+        RESET <= '1';
         assert OUT_PC = "00000000"
         report "Start value for PC not 0000_0000"
         severity error;
@@ -71,6 +71,7 @@ begin
         report "PC changed when loading new jump value"
         severity error;        
 
+        INC_PC <= '0';
         LD_JMP_VALUE <= '0';
         NEW_JMP_VALUE <= "10101011";
         JMP_ENA <= '1';

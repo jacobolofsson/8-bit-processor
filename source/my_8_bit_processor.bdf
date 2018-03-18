@@ -21,7 +21,7 @@ applicable agreement for further details.
 (header "graphic" (version "1.4"))
 (pin
 	(input)
-	(rect 48 96 224 112)
+	(rect 120 248 296 264)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "CLK" (rect 9 0 30 12)(font "Arial" ))
 	(pt 176 8)
@@ -34,10 +34,11 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 64 264 120 280))
 )
 (pin
 	(input)
-	(rect 48 112 224 128)
+	(rect 120 264 296 280)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
 	(text "RES" (rect 9 0 31 12)(font "Arial" ))
 	(pt 176 8)
@@ -50,9 +51,10 @@ applicable agreement for further details.
 		(line (pt 117 12)(pt 121 8))
 	)
 	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+	(annotation_block (location)(rect 64 280 120 296))
 )
 (symbol
-	(rect 664 40 912 184)
+	(rect 736 192 984 336)
 	(text "my_ram" (rect 5 0 46 12)(font "Arial" ))
 	(text "inst" (rect 8 128 25 140)(font "Arial" ))
 	(port
@@ -94,7 +96,7 @@ applicable agreement for further details.
 		(pt 248 32)
 		(output)
 		(text "DATA_OUT[7..0]" (rect 0 0 82 12)(font "Arial" ))
-		(text "DATA_OUT[7..0]" (rect 158 27 227 39)(font "Arial" ))
+		(text "DATA_OUT[7..0]" (rect 158 27 240 39)(font "Arial" ))
 		(line (pt 248 32)(pt 232 32)(line_width 3))
 	)
 	(drawing
@@ -102,7 +104,7 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 352 72 624 168)
+	(rect 424 224 696 320)
 	(text "my_CPU" (rect 5 0 52 14)(font "Arial" (font_size 8)))
 	(text "inst2" (rect 8 80 31 92)(font "Arial" ))
 	(port
@@ -152,91 +154,91 @@ applicable agreement for further details.
 	)
 )
 (connector
-	(pt 920 184)
-	(pt 336 184)
+	(pt 408 288)
+	(pt 424 288)
 	(bus)
 )
 (connector
-	(pt 336 136)
-	(pt 352 136)
+	(pt 720 224)
+	(pt 736 224)
+)
+(connector
+	(pt 696 288)
+	(pt 736 288)
+)
+(connector
+	(pt 720 224)
+	(pt 720 192)
+)
+(connector
+	(pt 400 272)
+	(pt 400 208)
+)
+(connector
+	(pt 400 208)
+	(pt 712 208)
+)
+(connector
+	(pt 712 208)
+	(pt 712 240)
+)
+(connector
+	(pt 712 240)
+	(pt 736 240)
+)
+(connector
+	(pt 720 192)
+	(pt 392 192)
+)
+(connector
+	(pt 392 256)
+	(pt 392 192)
+)
+(connector
+	(pt 696 256)
+	(pt 736 256)
 	(bus)
 )
 (connector
-	(pt 336 184)
-	(pt 336 136)
+	(pt 696 272)
+	(pt 736 272)
 	(bus)
 )
 (connector
-	(pt 920 184)
-	(pt 920 72)
+	(pt 296 272)
+	(pt 400 272)
+)
+(connector
+	(pt 400 272)
+	(pt 424 272)
+)
+(connector
+	(pt 296 256)
+	(pt 392 256)
+)
+(connector
+	(pt 392 256)
+	(pt 424 256)
+)
+(connector
+	(pt 984 224)
+	(pt 1000 224)
 	(bus)
 )
 (connector
-	(pt 648 72)
-	(pt 664 72)
-)
-(connector
-	(pt 920 72)
-	(pt 912 72)
+	(pt 408 288)
+	(pt 408 352)
 	(bus)
 )
 (connector
-	(pt 624 136)
-	(pt 664 136)
-)
-(connector
-	(pt 648 72)
-	(pt 648 40)
-)
-(connector
-	(pt 328 120)
-	(pt 328 56)
-)
-(connector
-	(pt 328 56)
-	(pt 640 56)
-)
-(connector
-	(pt 224 120)
-	(pt 328 120)
-)
-(connector
-	(pt 328 120)
-	(pt 352 120)
-)
-(connector
-	(pt 640 56)
-	(pt 640 88)
-)
-(connector
-	(pt 640 88)
-	(pt 664 88)
-)
-(connector
-	(pt 648 40)
-	(pt 320 40)
-)
-(connector
-	(pt 320 104)
-	(pt 320 40)
-)
-(connector
-	(pt 224 104)
-	(pt 320 104)
-)
-(connector
-	(pt 320 104)
-	(pt 352 104)
-)
-(connector
-	(pt 624 104)
-	(pt 664 104)
+	(pt 408 352)
+	(pt 1000 352)
 	(bus)
 )
 (connector
-	(pt 624 120)
-	(pt 664 120)
+	(pt 1000 224)
+	(pt 1000 352)
 	(bus)
 )
-(junction (pt 328 120))
-(junction (pt 320 104))
+(junction (pt 400 272))
+(junction (pt 392 256))

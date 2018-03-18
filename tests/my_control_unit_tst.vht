@@ -32,7 +32,7 @@ architecture test of my_control_unit_TST is
               ADR2_LD         : out std_logic;
               ADR2_INC        : out std_logic;
               MEM_WRT_ENA     : out std_logic;
-              EXECUTE_NEXT      : out std_logic);
+              EXECUTE_NEXT    : out std_logic);
     end component;
 
     signal CLK             : std_logic := '0';
@@ -91,7 +91,7 @@ begin
               ADR2_LD         => ADR2_LD,
               ADR2_INC        => ADR2_INC,
               MEM_WRT_ENA     => MEM_WRT_ENA,
-              EXECUTE_NEXT      => EXECUTE_NEXT);
+              EXECUTE_NEXT    => EXECUTE_NEXT);
 
     stimuli : process
     begin
@@ -275,7 +275,7 @@ begin
     
     instruction_verificattion : process (CLK)
     begin
-        if falling_edge(CLK) then
+        if falling_edge(CLK) and RESET = '1' then
             if FETCH_CURRENT = '1' then
                 assert DATA_BUS_SEL    = SEL_D_MEM and
                        ADDR_BUS_SEL    = SEL_A_PC and 

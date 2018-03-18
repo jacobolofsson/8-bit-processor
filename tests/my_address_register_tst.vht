@@ -9,6 +9,7 @@ architecture test of my_address_register_TST is
    component my_address_register 
       port (
          CLK         : in std_logic;
+         RESET       : in std_logic;
          INC_ADDRESS : in std_logic;
          LD_ADDRESS  : in std_logic;
          NEW_ADDRESS : in my_bus_type;
@@ -17,6 +18,7 @@ architecture test of my_address_register_TST is
    end component;
 
    signal CLK         : std_logic := '0';
+   signal RESET       : std_logic := '0';
    signal INC_ADDRESS : std_logic := '0';
    signal LD_ADDRESS  : std_logic := '0';
    signal NEW_ADDRESS : my_bus_type := "11110000";
@@ -29,6 +31,7 @@ begin
    dut : my_address_register
    port map (
       CLK         => CLK,
+      RESET       => RESET,
       INC_ADDRESS => INC_ADDRESS,
       LD_ADDRESS  => LD_ADDRESS,
       NEW_ADDRESS => NEW_ADDRESS,
@@ -43,6 +46,7 @@ begin
       severity error;
 
       INC_ADDRESS <= '1';
+      RESET <= '1';
 
       wait for CLK_PERIOD;
       assert OUT_ADDRESS = "00000001"

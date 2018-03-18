@@ -23,8 +23,8 @@ end entity;
 
 architecture rtl of my_data_mux is
 begin
-    with SEL select
-        DATA_BUS <= ALU when SEL_D_ALU,
-                    MEM when SEL_D_MEM,
-                    (others => '0') when others;
+    with SEL select DATA_BUS <=
+      ALU             when SEL_D_ALU,
+      MEM             when SEL_D_MEM,
+      (others => '0') when others;
 end architecture;

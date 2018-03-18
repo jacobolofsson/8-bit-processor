@@ -30,11 +30,15 @@ begin
     stimuli : process
     begin
         SEL <= SEL_D_ALU;
+        wait for 5 ns;
+
         assert DATA_BUS = "11110000"
         report "Sel ALU data error"
         severity error;
 
         SEL <= SEL_D_MEM;
+        wait for 5 ns;
+
         assert DATA_BUS = "00001111"
         report "Sel MEM data error"
         severity error;

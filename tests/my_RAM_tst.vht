@@ -25,7 +25,7 @@ architecture test of my_RAM_TST is
     signal DATA_IN   : my_bus_type := "10101010";
     signal DATA_OUT  : my_bus_type;
 
-    constant CLK_PERIOD : time := 50 ns; -- EDIT Put right period here
+    constant CLK_PERIOD : time := 50 ns; 
 begin
     CLK <= not CLK after CLK_PERIOD/2;
 

@@ -82,36 +82,83 @@ package my_package is
    type my_mem_type is array( (2**MEMORY_DEPTH - 1) downto 0 ) of my_bus_type;
    
    constant EMPTY_MEMORY : my_mem_type := ( others => (others => '0') );
-   constant TEST_PROGRAM : my_mem_type := (
+   constant TEST_PROGRAM_1 : my_mem_type := (
       -- A = B + C
-      0      => OP_LD_ADR1, --ADR1 = ADDR of B 
-      1      => X"FB",      --ADDR of B
-      2      => OP_LD_ADR2, --ADR2 = ADDR of C
-      3      => X"FC",      --ADDR of C
+      0      => OP_LD_ADR1, --ADR1 = &B 
+      1      => X"FB",      --&B
+      2      => OP_LD_ADR2, --ADR2 = &C
+      3      => X"FC",      --&C
       4      => OP_LD_ACC,  --ACC = B
       5      => OP_LD_TEMP, --TMP = C
       6      => OP_ADD,     --ACC = ACC+TMP = B+C
-      7      => OP_LD_ADR1, --ADR1 = ADDR of A
-      8      => X"FA",      --ADDR of A
+      7      => OP_LD_ADR1, --ADR1 = &A
+      8      => X"FA",      --&A
       9      => OP_ST_ACC1, --A = ACC = B+C
-      -- IF A > 0 THEN B = C
-      10     => OP_LD_JUMPREG,
-      11     => X"03",
-      12     => OP_JPF_G,   --IF ACC>0, skip next 3 instructions
-      13     => OP_LD_JUMPREG,
-      14     => X"07",
-      15     => OP_JPF,     --Jump to end
-      16     => OP_LD_ADR1, --ADR1 = ADDR of C
-      17     => X"FC",      --ADDR of C
-      18     => OP_LD_ADR2, --ADR2 = ADDR of B
-      19     => X"FB",      --ADDR of B
-      20     => OP_LD_ACC,  --ACC = C
-      21     => OP_ST_ACC2, --B = ACC = C
-      22     => OP_LD_JUMPREG, --Start of infinite loop
-      23     => X"01",
-      24     => OP_JPB,     --End of infinite loop
       -- End of program memory
+      10     => OP_LD_JUMPREG, --Start of infinite loop
+      11     => X"01",
+      12     => OP_JPB,        --End of infinite loop
       -- Start of data memory
+      16#FB# => X"07",      --B
+      16#FC# => X"05",      --C
+      others => OP_NOP
+   );
+      
+   constant TEST_PROGRAM_2 : my_mem_type := (
+      -- IF A >= 0 THEN B = C (A > 0)
+       0     => OP_LD_ADR1, --ADR1 = &0
+       1     => X"F0",      --&0
+       2     => OP_LD_ACC,  --ACC = 0
+       3     => OP_LD_ADR2, --ADR2 = &A
+       4     => X"FA",      --&A
+       5     => OP_LD_TEMP, --TMP = A
+       6     => OP_LD_JUMPREG, --JMPREG = 6
+       7     => X"06",
+       8     => OP_CMP,     --0 > A
+       9     => OP_JPF_G,   -- Jump if >
+       10    => OP_LD_ADR1, --ADR1 = &C
+       11    => X"FC",      --&C
+       12    => OP_LD_ADR2, --ADR2 = &B
+       13    => X"FB",      --&B
+       14    => OP_LD_ACC,  --ACC = C
+       15    => OP_ST_ACC2, --B = ACC = C
+      -- End of program memory
+       16    => OP_LD_JUMPREG, --Start of infinite loop
+       17    => X"01",
+       18    => OP_JPB,        --End of infinite loop
+      -- Start of data memory
+      16#F0# => X"00",      --0
+      16#FA# => X"07",      --A
+      16#FB# => X"07",      --B
+      16#FC# => X"05",      --C
+      others => OP_NOP
+   );
+   
+   constant TEST_PROGRAM_3 : my_mem_type := (
+      -- IF A >= 0 THEN B = C (A < 0)
+       0     => OP_LD_ADR1, --ADR1 = &0
+       1     => X"F0",      --&0
+       2     => OP_LD_ACC,  --ACC = 0
+       3     => OP_LD_ADR2, --ADR2 = &A
+       4     => X"FA",      --&A
+       5     => OP_LD_TEMP, --TMP = A
+       6     => OP_LD_JUMPREG, --JMPREG = 6
+       7     => X"06",
+       8     => OP_CMP,     --0 > A
+       9     => OP_JPF_G,   --Jump if >
+       10    => OP_LD_ADR1, --ADR1 = &C
+       11    => X"FC",      --&C
+       12    => OP_LD_ADR2, --ADR2 = &B
+       13    => X"FB",      --&B
+       14    => OP_LD_ACC,  --ACC = C
+       15    => OP_ST_ACC2, --B = ACC = C
+      -- End of program memory
+       16    => OP_LD_JUMPREG, --Start of infinite loop
+       17    => X"01",
+       18    => OP_JPB,        --End of infinite loop
+      -- Start of data memory
+      16#F0# => X"00",      --0
+      16#FA# => X"F7",      --A
       16#FB# => X"07",      --B
       16#FC# => X"05",      --C
       others => OP_NOP

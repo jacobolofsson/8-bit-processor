@@ -36,16 +36,16 @@ architecture rtl of my_ALU is
    signal accumulator : signed(REG_WIDTH-1 downto 0) := (others => '0');
    signal res         : signed(REG_WIDTH-1 downto 0);
 begin
-   with OPERATION select
-      res <= accumulator + temporary when ALU_ADD,
-             accumulator - temporary when ALU_SUB,
-             accumulator + 1 when ALU_INC,
-             accumulator - 1 when ALU_DEC,
-             accumulator(REG_WIDTH-2 downto 0) & accumulator(REG_WIDTH-1) when ALU_RAL,
-             accumulator(0) & accumulator(REG_WIDTH-1 downto 1) when ALU_RAR,
-             accumulator(REG_WIDTH-2 downto 0) & '0' when ALU_SHL,
-             '0' & accumulator(REG_WIDTH-1 downto 1) when ALU_SHR,
-             accumulator when others;
+   with OPERATION select res <= 
+      accumulator + temporary when ALU_ADD,
+      accumulator - temporary when ALU_SUB,
+      accumulator + 1         when ALU_INC,
+      accumulator - 1         when ALU_DEC,
+      accumulator(REG_WIDTH-2 downto 0) & accumulator(REG_WIDTH-1) when ALU_RAL,
+      accumulator(0) & accumulator(REG_WIDTH-1 downto 1) when ALU_RAR,
+      accumulator(REG_WIDTH-2 downto 0) & '0' when ALU_SHL,
+      '0' & accumulator(REG_WIDTH-1 downto 1) when ALU_SHR,
+      accumulator when others;
 
    process (CLK, RESET)
    begin

@@ -63,6 +63,8 @@ end entity;
 architecture rtl of my_control_unit is
    signal current_instruction : my_bus_type := (others => '0');
 begin
+   -- Update state: Switch between fetch and execute on clock.
+   -- If fetch then uppdate current instruction
    update_state : process (CLK, RESET)
    begin
       if RESET = RST_VAL then
@@ -76,7 +78,8 @@ begin
       end if;
    end process;
    
-   update_outputs : process (current_instruction, FETCH_CURRENT)
+   -- Update outputs: Update outputs for every change in state
+   update_outputs : process (current_instruction, FETCH_CURRENT, ALU_GT, ALU_Z, LC_Z)
    begin
       -- Set default values
       DATA_BUS_SEL    <= SEL_D_NOP;

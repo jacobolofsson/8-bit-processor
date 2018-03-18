@@ -33,16 +33,22 @@ begin
     stimuli : process
     begin
         SEL <= SEL_A_PC;
+        wait for 5 ns;
+
         assert ADDR_BUS = "10101010"
         report "Sel pc error"
         severity error;
 
         SEL <= SEL_A_ADR1;
+        wait for 5 ns;
+
         assert ADDR_BUS = "11110000"
         report "Sel adr1 error"
         severity error;
 
         SEL <= SEL_A_ADR2;
+        wait for 5 ns;
+
         assert ADDR_BUS = "00001111"
         report "Sel adr2 error"
         severity error;

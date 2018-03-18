@@ -16,7 +16,7 @@ use work.my_package.all;
 entity my_ram is
    port (
       CLK       : in std_logic;
-      RESET       : in std_logic;
+      RESET     : in std_logic;
       ADDRESS   : in my_bus_type;
       DATA_IN   : in my_bus_type;
       WRITE_ENA : in std_logic;
@@ -25,7 +25,8 @@ entity my_ram is
 end entity;
 
 architecture rtl of my_ram is
-   constant DEFAULT_MEMORY : my_mem_type := TEST_PROGRAM;
+   --Change DEFAULT_MEMORY to change the program that is loaded at start/rst
+   constant DEFAULT_MEMORY : my_mem_type := TEST_PROGRAM_1; 
    signal memory_array : my_mem_type := DEFAULT_MEMORY;
 begin
    DATA_OUT <= memory_array( conv_integer(ADDRESS) );

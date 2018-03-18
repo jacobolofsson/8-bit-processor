@@ -10,6 +10,7 @@ architecture test of my_loop_counter_TST is
     component my_loop_counter
         port (
            CLK             : in std_logic;
+           RESET           : in std_logic;
            LD_LOOP_VALUE   : in std_logic;
            DEC_LOOP_VALUE  : in std_logic;
            NEW_LOOP_VALUE  : in my_bus_type;
@@ -18,6 +19,7 @@ architecture test of my_loop_counter_TST is
     end component;
 
     signal CLK             : std_logic := '0';
+    signal RESET           : std_logic := '0';
     signal LD_LOOP_VALUE   : std_logic := '0';
     signal DEC_LOOP_VALUE  : std_logic := '0';
     signal NEW_LOOP_VALUE  : my_bus_type := "00000010";
@@ -30,6 +32,7 @@ begin
     dut : my_loop_counter
     port map (
        CLK             => CLK,
+       RESET           => RESET,
        LD_LOOP_VALUE   => LD_LOOP_VALUE,
        DEC_LOOP_VALUE  => DEC_LOOP_VALUE,
        NEW_LOOP_VALUE  => NEW_LOOP_VALUE,
@@ -43,6 +46,7 @@ begin
        report "LOOP_VALUE_ZERO /= 0"
        severity error;
 
+       RESET <= '1';
        LD_LOOP_VALUE <= '1';
 
        wait for CLK_PERIOD;
@@ -50,6 +54,7 @@ begin
        report "LOOP_VALUE_ZERO /= 0"
        severity error;
 
+       LD_LOOP_VALUE <= '0';
        DEC_LOOP_VALUE <= '1';
 
        wait for CLK_PERIOD;
